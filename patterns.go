@@ -1,8 +1,8 @@
 package dateparser
 
 import (
-    "time"
     "strings"
+    "time"
 )
 
 type HandleFn func(d *Date, ts []*Token) bool
@@ -28,7 +28,7 @@ func (p *Pattern) Add() *Pattern {
     return ptn
 }
 
-func (p *Pattern) Parse(b []byte, def *time.Time) *Date {
+func (p *Pattern) Parse(b []rune, def *time.Time) *Date {
     tokens := (&Timelex{b, 0}).All()
     date := &Date{}
 
@@ -181,6 +181,16 @@ var Weekday = MatchMap(map[string]int{
     "Fri": 6,
     "Saturday": 7,
     "Sat": 7,
+
+    // Russian
+    "Воскресенье": 1,
+    "Понедельник": 2,
+    "Вторник": 3,
+    "Среда": 4,
+    "Четверг": 5,
+    "Пятница": 6,
+    "Суббота": 7,
+
 })
 
 // 12-months
@@ -214,6 +224,20 @@ var MonthName = MatchMap(map[string]int{
     "Nov": 11,
     "December": 12,
     "Dec": 12,
+
+    // Russian
+    "Январь": 1,
+    "Февраль": 2,
+    "Март": 3,
+    "Апрель": 4,
+    "Май": 5,
+    "Июль": 7,
+    "Июнь": 6,
+    "Август": 8,
+    "Сентябрь": 9,
+    "Октябрь": 10,
+    "Ноябрь": 11,
+    "Декабрь": 12,
 })
 
 // month: either name or MM
@@ -263,6 +287,20 @@ var Month = MatchMap(map[string]int{
     "December": 12,
     "Dec": 12,
     "12": 12,
+
+    // Russian
+    "Январь": 1,
+    "Февраль": 2,
+    "Март": 3,
+    "Апрель": 4,
+    "Май": 5,
+    "Июль": 7,
+    "Июнь": 6,
+    "Август": 8,
+    "Сентябрь": 9,
+    "Октябрь": 10,
+    "Ноябрь": 11,
+    "Декабрь": 12,
 })
 
 // 4-digit year
