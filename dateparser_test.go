@@ -244,11 +244,19 @@ var tests = []struct{s string; e string}{
         "10:00 pm",
         "0001-01-01 22:00:00 +0000 UTC",
     },
+    {
+        "Апрель 2008",
+        "2008-04-01 00:00:00 +0000 UTC",
+    },
+    {
+        "05.02.2019 08:32:09",
+        "2019-02-05 08:32:09 +0000 UTC",
+    },
 }
 
 func TestParse(t *testing.T) {
     for _, test := range tests {
-        v := fmt.Sprint(Parse([]byte(test.s), nil))
+        v := fmt.Sprint(Parse([]rune(test.s), nil))
         fmt.Println("Parse=", test.s, "Result=", v)
         assert.Equal(t, test.e, v)
     }

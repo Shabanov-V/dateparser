@@ -1,7 +1,7 @@
 package dateparser
 
 type Timelex struct {
-    buffer []byte
+    buffer []rune
     idx int
 }
 
@@ -14,9 +14,8 @@ func (t *Timelex) All() []*Token {
 }
 
 func (t *Timelex) Next() *Token {
-    token := []byte{}
+    token := []rune{}
     state := ""
-
     if t.idx >= len(t.buffer) {
         return &Token{"", "EOF", 0}
     }
@@ -35,7 +34,7 @@ L:
             } else if IsDigit(b) {
                 state = "0"
             } else if b == ' ' {
-                token = []byte{} // reset the token
+                token = []rune{} // reset the token
             } else {
                 state = "?"
             }
@@ -62,11 +61,11 @@ L:
 }
 
 
-func IsWord(b byte) bool {
-    return (b >= 'A' && b <= 'Z') || (b >= 'a' && b <= 'z')
+func IsWord(b rune) bool {
+    return (b >= 'A' && b <= 'Z') || (b >= 'a' && b <= 'z') || (b >= 'а' && b <= 'я') || (b >= 'А' && b <= 'Я')
 }
 
-func IsDigit(b byte) bool {
+func IsDigit(b rune) bool {
     return b >= '0' && b <= '9'
 }
 

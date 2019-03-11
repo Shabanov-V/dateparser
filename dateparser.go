@@ -6,7 +6,7 @@ import (
 )
 
 var Parser = &Pattern{}
-func Parse(b []byte, def *time.Time) *Date {
+func Parse(b []rune, def *time.Time) *Date {
     return Parser.Parse(b, def)
 }
 
